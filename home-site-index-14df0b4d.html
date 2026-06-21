@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes">
+    <title>资料索引 · 华体会</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f9fbfc;
+            color: #1e2a32;
+            line-height: 1.6;
+            padding: 0 1.25rem;
+        }
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 2rem 0 3rem;
+        }
+        /* 首页横幅 (杂志式) */
+        .hero {
+            background: linear-gradient(145deg, #e6f0f0 0%, #d7e9e6 100%);
+            border-radius: 2rem;
+            padding: 2.8rem 2.2rem;
+            margin-bottom: 2.8rem;
+            box-shadow: 0 8px 16px rgba(0,60,50,0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(0,168,140,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 520;
+            letter-spacing: -0.02em;
+            color: #0d3d3a;
+            margin-bottom: 0.6rem;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #2a5c56;
+            border-left: 4px solid #24a394;
+            padding-left: 1rem;
+            margin-top: 0.25rem;
+            background: rgba(255,255,255,0.5);
+            display: inline-block;
+            border-radius: 0 12px 12px 0;
+            padding: 0.4rem 1.2rem 0.4rem 1rem;
+            backdrop-filter: blur(2px);
+        }
+        .hero .meta-tag {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #3b6d66;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.2rem;
+        }
+        .hero .meta-tag span {
+            background: rgba(255,255,255,0.65);
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            border: 1px solid #bcd9d3;
+        }
+
+        /* 背景说明卡片 */
+        .bg-note {
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 2rem 2rem 2rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 6px 14px rgba(0,40,35,0.04);
+            border: 1px solid #e7f0ee;
+            position: relative;
+        }
+        .bg-note h2 {
+            font-size: 1.5rem;
+            font-weight: 480;
+            color: #0b4d45;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .bg-note h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, #b5d5cf, transparent);
+        }
+        .bg-note p {
+            font-size: 1.05rem;
+            color: #2a3e3a;
+            max-width: 720px;
+        }
+
+        /* 网格卡片——三段自然介绍 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.6rem;
+            margin-bottom: 3rem;
+        }
+        @media (min-width: 680px) {
+            .grid-cards {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+        .card {
+            background: white;
+            border-radius: 1.75rem;
+            padding: 1.8rem 1.6rem 2rem;
+            border: 1px solid #e3efec;
+            transition: box-shadow 0.2s ease, transform 0.1s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 10px rgba(0,50,40,0.02);
+        }
+        .card:hover {
+            box-shadow: 0 10px 24px rgba(0,90,70,0.06);
+            transform: translateY(-2px);
+        }
+        .card .icon-wrap {
+            display: inline-flex;
+            width: 48px;
+            height: 48px;
+            background: #e2f3f0;
+            border-radius: 18px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: #0b6e60;
+            font-size: 1.5rem;
+        }
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 480;
+            color: #0e4c44;
+            margin-bottom: 0.8rem;
+        }
+        .card p {
+            font-size: 0.98rem;
+            color: #2a423e;
+            line-height: 1.65;
+            flex: 1;
+        }
+        .card .tag {
+            margin-top: 1.2rem;
+            font-size: 0.8rem;
+            color: #2d7b6e;
+            background: #ebf5f2;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            align-self: flex-start;
+            border: 1px solid #c7dfd8;
+        }
+
+        /* 页尾访问提示 —— 干净自然 */
+        .footer-note {
+            background: #eef6f4;
+            border-radius: 2rem;
+            padding: 2rem 2rem 1.8rem;
+            margin-top: 2rem;
+            border: 1px solid #d4e6e1;
+            text-align: center;
+        }
+        .footer-note p {
+            font-size: 1.05rem;
+            color: #1e4d45;
+            max-width: 600px;
+            margin: 0 auto 0.8rem;
+        }
+        .footer-note .link-sentence {
+            background: white;
+            display: inline-block;
+            padding: 0.5rem 1.8rem;
+            border-radius: 60px;
+            box-shadow: 0 2px 6px rgba(0,30,20,0.03);
+            border: 1px solid #bcd9d2;
+            font-size: 1rem;
+        }
+        .footer-note a {
+            color: #0a6b5d;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #7ab3a7;
+            transition: border-color 0.2s;
+        }
+        .footer-note a:hover {
+            border-bottom: 1px solid #0a6b5d;
+        }
+
+        .foot-extra {
+            margin-top: 2.2rem;
+            font-size: 0.85rem;
+            color: #4f736b;
+            padding-top: 0.6rem;
+            border-top: 1px solid #d2e3de;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem 2rem;
+        }
+        .foot-extra span {
+            opacity: 0.75;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 480px) {
+            .hero { padding: 2rem 1.2rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero .sub { font-size: 1rem; }
+            .bg-note { padding: 1.5rem; }
+            .card { padding: 1.5rem; }
+        }
+        @media (max-width: 400px) {
+            .footer-note .link-sentence { padding: 0.4rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- 杂志式首页横幅 -->
+    <div class="hero">
+        <h1>资料索引 · 华体会</h1>
+        <div class="sub">从信息整理的角度，梳理背景与脉络</div>
+        <div class="meta-tag">
+            <span>📂 专题笔记</span>
+            <span>🗂️ 来源整理</span>
+            <span>📋 2025 · 索引</span>
+        </div>
+    </div>
+
+    <!-- 背景说明 -->
+    <div class="bg-note">
+        <h2>📘 为什么需要一份索引</h2>
+        <p>
+            面对分散的信息，比起零散浏览，不如先搭建一个轻量的整理框架。本页围绕「华体会」相关材料，以资料卡片的形式做一次静态梳理。内容来自公开可查的叙述与社区记录，不涉及深度分析，只作为自然的信息参照。希望这份索引能帮到初次接触该话题的读者。
+        </p>
+    </div>
+
+    <!-- 三段自然介绍（网格卡片） -->
+    <div class="grid-cards">
+        <div class="card">
+            <div class="icon-wrap">📎</div>
+            <h3>信息片段</h3>
+            <p>从不同渠道收集到的条目、说明与参考线索。很多时候，一个简单的索引就能节省重复查找的时间。</p>
+            <div class="tag">档案 · 片段</div>
+        </div>
+        <div class="card">
+            <div class="icon-wrap">🧩</div>
+            <h3>关联内容</h3>
+            <p>不同的材料之间偶尔会形成微弱的关联。这里只做极简的并置展示，不强行归纳，留给读者自己判断。</p>
+            <div class="tag">关联 · 并置</div>
+        </div>
+        <div class="card">
+            <div class="icon-wrap">📌</div>
+            <h3>静态快照</h3>
+            <p>不追踪实时变动，只保留整理时点的可见内容。页面本身也是一个静止的资料锚点，适合对照翻阅。</p>
+            <div class="tag">快照 · 参照</div>
+        </div>
+    </div>
+
+    <!-- 页尾访问提示（自然嵌入链接） -->
+    <div class="footer-note">
+        <p>如果你正在寻找更完整的背景信息，可以自行查阅<span class="link-sentence"><a href="https://home-site-hth.com.cn">华体会</a></span>的相关记录。本页只做初步的资料整理，更多细节还需回到原始来源阅读。</p>
+        <div class="foot-extra">
+            <span>· 整理日期 2025.04 ·</span>
+            <span>· 索引版本 v1 ·</span>
+            <span>· 页面仅供个人参考 ·</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
