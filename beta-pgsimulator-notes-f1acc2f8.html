@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>从模拟到感知 · 聊聊 pg模拟器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #faf6f0;
+            font-family: "Georgia", "Noto Serif SC", "SimSun", serif;
+            color: #2e2b27;
+            line-height: 1.75;
+            padding: 2rem 1rem;
+        }
+
+        .article-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: #fdfcf9;
+            padding: 3rem 2.5rem;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 0 0 1px #e8e2da;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #1f1b17;
+            border-left: 4px solid #b7a48b;
+            padding-left: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .subhead {
+            font-size: 1.05rem;
+            color: #7a7168;
+            margin-bottom: 2.2rem;
+            font-style: italic;
+            padding-left: 1.6rem;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #3e3833;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .pull-quote {
+            background: #f3eee8;
+            padding: 1.6rem 2rem;
+            margin: 2rem 0;
+            border-radius: 0 6px 6px 0;
+            border-left: 4px solid #9c8b78;
+            font-style: italic;
+            color: #3f3934;
+            font-size: 1.05rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .pull-quote::before {
+            content: "“";
+            font-size: 2.2rem;
+            color: #b7a48b;
+            margin-right: 0.3rem;
+            line-height: 0;
+            vertical-align: -0.25rem;
+        }
+
+        .pull-quote::after {
+            content: "”";
+            font-size: 2.2rem;
+            color: #b7a48b;
+            margin-left: 0.3rem;
+            line-height: 0;
+            vertical-align: -0.25rem;
+        }
+
+        .note-box {
+            background: #f6f1ea;
+            padding: 1.4rem 1.8rem;
+            border-radius: 4px;
+            margin: 2rem 0 1.8rem 0;
+            border: 1px solid #e0d7cd;
+            font-size: 0.98rem;
+        }
+
+        .note-box strong {
+            color: #4e433b;
+            font-weight: 600;
+        }
+
+        a {
+            color: #7c6b58;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #cbbcb0;
+            transition: color 0.2s, text-decoration-color 0.2s;
+        }
+
+        a:hover {
+            color: #3e3229;
+            text-decoration-color: #7c6b58;
+        }
+
+        .faq-mini {
+            margin-top: 3rem;
+            border-top: 1px solid #e5ddd4;
+            padding-top: 2rem;
+        }
+
+        .faq-mini h3 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #2a2520;
+        }
+
+        .faq-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item .q {
+            font-weight: 600;
+            color: #4a423b;
+        }
+
+        .faq-item .a {
+            color: #575049;
+            padding-left: 1.2rem;
+        }
+
+        .ending {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #ddd3c8;
+            font-size: 0.98rem;
+            color: #625a52;
+            text-align: right;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            .article-container {
+                padding: 2rem 1.2rem;
+            }
+            h1 {
+                font-size: 1.7rem;
+                padding-left: 0.8rem;
+            }
+            .subhead {
+                font-size: 0.95rem;
+                padding-left: 1rem;
+            }
+            .pull-quote {
+                padding: 1.2rem 1.2rem;
+                font-size: 0.98rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="article-container">
+        <h1>当模拟成为日常：<br>一点关于 pg模拟器 的思考</h1>
+        <div class="subhead">从工具到陪伴，一个数字沙盒的安静生长</div>
+
+        <p class="intro">
+            你有没有过这样的时刻——忽然想安静地尝试点什么，又不想被规则、进度或别人的目光裹挟？
+            一个足够灵活的模拟环境，有时候就像一间只属于自己的小书房，你可以随意排列想法，再轻轻推翻。
+        </p>
+
+        <p>
+            几年前我第一次接触“模拟器”这个概念，其实是在一个很偶然的午后。朋友发来一个链接，说这个东西可以让你在浏览器里捣鼓一些平时不太敢乱碰的逻辑组合。那时我还不太理解，为什么有人会花时间搭建一个几乎“什么都不是”的虚拟场景。后来才慢慢体会到，那种没有预设终点的尝试本身，就是一种乐趣。
+        </p>
+
+        <p>
+            这种感受，在后来用到 <a href="https://beta-pgsimulator.com">pg模拟器</a> 时又一次被唤醒。它没有把“你必须完成某件事”写在脸上，而是更像一个空白但结构清晰的实验台。你可以往里面丢想法，看它们怎么互相影响，再根据反馈调整下一步。整个过程里没有评分，没有倒计时，只有你和屏幕之间安静的对话。
+        </p>
+
+        <div class="pull-quote">
+            模拟不是逃避现实，而是给现实多准备几套草稿。
+        </div>
+
+        <p>
+            我认识一位教编程基础的朋友，他偶尔会在课上用类似的模拟环境让学生测试一些小逻辑。他说，很多学生面对编辑器会紧张，但换成模拟界面反而更放得开——好像默认就允许犯错一样。我想，这大概就是模拟器最温柔的地方：它预设了“可以重来”的宽容度，于是探索的门槛就降低了。
+        </p>
+
+        <p>
+            当然，模拟器并不总是为了学习或者工作。有时候它就像一本可以随意涂画的笔记本。你调整几个参数，观察结果的变化，然后觉得“哦，原来是这样”，或者“再试试那样”。这种微小的好奇心满足，本身就让人放松。在信息过载的时代，一个能让人专注在“如果……会怎样”这种简单问题上的空间，反而显得珍贵。
+        </p>
+
+        <div class="note-box">
+            <strong>一点提醒：</strong> 模拟环境提供的是可能性，而不是答案。它不会承诺你一定能得到想要的结果，但会让你更清晰地看见自己选择的方向。如果你在寻找一个没有压力的试验场，不妨打开 <a href="https://beta-pgsimulator.com">pg模拟器</a> 随便试试——哪怕只是改变一个数字，看看会发生什么。
+        </div>
+
+        <p>
+            说到底，模拟器是一面镜子，映出的是使用者当下的好奇心。有人用它梳理逻辑，有人用它打发时间，也有人用它验证某个一闪而过的念头。它不评判这些用途的好坏，只是安静地运行着，等你按下下一个按钮。
+        </p>
+
+        <p>
+            如果你还没试过，也许今天就是个不错的起点。给自己留半小时，打开那个页面，随便点一点、拖一拖。可能什么大事都不会发生，但也许会收获一段完全属于自己的、专注于“尝试”本身的安静时光。
+        </p>
+
+        <div class="faq-mini">
+            <h3>· 摘录几句常见疑问 ·</h3>
+            <div class="faq-item">
+                <div class="q">问：这个模拟器需要安装吗？</div>
+                <div class="a">不需要，直接在浏览器里打开就能用。没有注册，没有下载，打开就是操作界面。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">问：适合完全零基础的人吗？</div>
+                <div class="a">模拟器的设计本身很直觉，没有复杂的术语引导。你只要抱着试试看的心态去点就好了，哪怕只是移动滑块看数值变化，也算一种探索。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">问：能用来做正经事吗？</div>
+                <div class="a">这取决于你怎么定义“正经”。有人用它理清思路，有人用它做快速原型验证。它本身不挑用户，只看你怎么用。</div>
+            </div>
+        </div>
+
+        <div class="ending">
+            —— 写于一个想安静试点什么的日子
+        </div>
+    </div>
+</body>
+</html>
